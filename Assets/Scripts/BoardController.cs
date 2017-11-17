@@ -10,7 +10,10 @@ public class BoardController : MonoBehaviour{
 
 	private GameObject[,] Cards;
 
-	private int Level = 8;
+	private bool InProgress = false;
+	private int Level;
+	private int Score;
+	private int WinningScore;
 	private int[] Multipliers;
 
 	private int[] SumInRow;
@@ -18,7 +21,13 @@ public class BoardController : MonoBehaviour{
 	private int[] SumInColumn;
 	private int[] BombsInColumn;
 
-	void Start(){
+	public void GenerateBoard(int level){
+		ClearChildren();
+
+		Level = level;
+		Score = 1;
+		WinningScore = 1;
+
 		GenerateLayouts();
 
 		Cards = new GameObject[5, 5];
@@ -46,6 +55,9 @@ public class BoardController : MonoBehaviour{
 					multiplier = 3;
 				}
 				--Multipliers[multiplier];
+				if(multiplier != 0){
+					WinningScore *= multiplier;
+				}
 
 				Vector3 offset = new Vector3(j, -i, 0);
 				Cards[i, j] = (GameObject)Instantiate(Card, transform.position + offset, Quaternion.identity, transform);
@@ -78,6 +90,14 @@ public class BoardController : MonoBehaviour{
 			offset = new Vector2(i + 0.875f, -5.53125f);
 			displayNumber = (GameObject)Instantiate(Digit, transform.position + offset, Quaternion.identity, transform);
 			displayNumber.GetComponent<DigitController>().SetValue(BombsInColumn[i]);
+		}
+
+		InProgress = true;
+	}
+
+	private void ClearChildren(){
+		foreach(Transform child in transform){
+			GameObject.Destroy(child.gameObject);
 		}
 	}
 
@@ -133,6 +153,35 @@ public class BoardController : MonoBehaviour{
 		for(int i = 0; i < Layouts.Length; ++i){
 			for(int j = 0; j < Layouts[i].Count; ++j){
 				Layouts[i][j][1] = 25 - Layouts[i][j][0] - Layouts[i][j][2] - Layouts[i][j][3];
+			}
+		}
+	}
+
+	public int GetScore(){
+		return Score;
+	}
+
+	public bool IsLost(){
+		return Score == 0;
+	}
+
+	public bool IsWon(){
+		return Score == WinningScore;
+	}
+
+	void Update(){
+		if(InProgress){
+			UpdateScore();
+		}
+	}
+
+	void UpdateScore(){
+		Score = 1;
+		for(int i = 0; i < 5; ++i){
+			for(int j = 0; j < 5; ++j){
+				if(Cards[i, j].GetComponent<CardController>().IsFlipped()){
+					Score *= Cards[i, j].GetComponent<CardController>().GetValue();
+				}
 			}
 		}
 	}

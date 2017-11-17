@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class CardController : MonoBehaviour{
-
 	public Sprite[] FlippedSprites;
 	public Sprite UnflippedSprite;
 	private SpriteRenderer SR;
@@ -18,6 +17,14 @@ public class CardController : MonoBehaviour{
 	public void Flip(){
 		Flipped = true;
 		ChangeSprite();
+	}
+
+	public bool IsFlipped(){
+		return Flipped;
+	}
+
+	public int GetValue(){
+		return Value;
 	}
 
 	public void SetValue(int v){

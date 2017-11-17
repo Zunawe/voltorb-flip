@@ -14,6 +14,10 @@ public class DetectTapped : MonoBehaviour{
 		}
 	}
 
+	void OnMouseDown(){
+		Callback();
+	}
+
 	public void RegisterCallback(Action cb){
 		Callback = cb;
 	}
