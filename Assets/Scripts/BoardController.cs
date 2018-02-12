@@ -5,10 +5,13 @@ public class BoardController : MonoBehaviour{
 	public GameObject Number;
 	public GameObject Digit;
 	public GameObject Card;
+	public GameObject SelectionIndicatorPrefab;
 
 	private List<int[]>[] Layouts;
 
 	private GameObject[,] Cards;
+	private GameObject SelectedCard;
+	private GameObject SelectionIndicator;
 
 	private bool InProgress = false;
 	private int Level;
@@ -23,6 +26,8 @@ public class BoardController : MonoBehaviour{
 
 	public void GenerateBoard(int level){
 		ClearChildren();
+		
+		SelectionIndicator = (GameObject)Instantiate(SelectionIndicatorPrefab, new Vector3(-5, -5, -1), Quaternion.identity, transform);
 
 		Level = level;
 		Score = 1;
@@ -167,6 +172,15 @@ public class BoardController : MonoBehaviour{
 
 	public bool IsWon(){
 		return Score == WinningScore;
+	}
+
+	public void Select(GameObject card){
+		if(SelectedCard != null){
+			SelectedCard.GetComponent<CardController>().Selected = false;
+		}
+		card.GetComponent<CardController>().Selected = true;
+		SelectedCard = card;
+		SelectionIndicator.transform.localPosition = card.transform.localPosition + (new Vector3(0, 0, -1));
 	}
 
 	void Update(){
