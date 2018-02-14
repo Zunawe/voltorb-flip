@@ -355,7 +355,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1701040052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0.54, z: 10}
+  m_LocalPosition: {x: -3, y: 0.53999996, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1963538209}
@@ -377,6 +377,7 @@ MonoBehaviour:
   CardPrefab: {fileID: 1217927372842932, guid: 78e96ae7083071141afea3e88139fd06, type: 2}
   SelectionIndicatorPrefab: {fileID: 1494750509027524, guid: 431afd63bf918d14ca74ed7258dc1c20,
     type: 2}
+  Scoreboard: {fileID: 462323825}
 --- !u!1 &1963538208
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,3 +421,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoardGameObject: {fileID: 1701040052}
+  ScoreboardGameObject: {fileID: 462323825}

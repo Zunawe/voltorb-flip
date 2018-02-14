@@ -19,7 +19,7 @@ public class CardController : MonoBehaviour{
 	}
 
 	public void OnTap(){
-		if(Selected){
+		if(Selected && !Flipped){
 			Flip();
 			Scoreboard.SendMessage("MultiplyScore", Value);
 		}
