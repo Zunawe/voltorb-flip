@@ -91,10 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlippedSprites:
-  - {fileID: 21300000, guid: df51980dc8370614faeaeb58bbafce34, type: 3}
-  - {fileID: 21300000, guid: 2af7830650c8c524dae10cbdf8c5839e, type: 3}
-  - {fileID: 21300000, guid: 8e0a400db51e8c54f894394ca6596ed1, type: 3}
-  - {fileID: 21300000, guid: 16aa1f0401c4372459325e1d6d28c103, type: 3}
+  - {fileID: 21300000, guid: a42ac80fbfe5961499f12fdef31a2c65, type: 3}
+  - {fileID: 21300002, guid: a42ac80fbfe5961499f12fdef31a2c65, type: 3}
+  - {fileID: 21300004, guid: a42ac80fbfe5961499f12fdef31a2c65, type: 3}
+  - {fileID: 21300006, guid: a42ac80fbfe5961499f12fdef31a2c65, type: 3}
   UnflippedSprite: {fileID: 21300000, guid: 6be4df0e973dcbb4a9de59ab11bbb36d, type: 3}
   Selected: 0
 --- !u!212 &212107530777545432

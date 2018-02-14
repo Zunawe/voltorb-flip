@@ -2,10 +2,11 @@
 using UnityEngine;
 
 public class BoardController : MonoBehaviour{
-	public GameObject Number;
-	public GameObject Digit;
-	public GameObject Card;
+	public GameObject NumberPrefab;
+	public GameObject CardPrefab;
 	public GameObject SelectionIndicatorPrefab;
+
+	public GameObject Scoreboard;
 
 	private List<int[]>[] Layouts;
 
@@ -65,8 +66,10 @@ public class BoardController : MonoBehaviour{
 				}
 
 				Vector3 offset = new Vector3(j, -i, 0);
-				Cards[i, j] = (GameObject)Instantiate(Card, transform.position + offset, Quaternion.identity, transform);
+				Cards[i, j] = (GameObject)Instantiate(CardPrefab, transform.position + offset, Quaternion.identity, transform);
 				Cards[i, j].GetComponent<CardController>().SetValue(multiplier);
+				Cards[i, j].GetComponent<CardController>().Board = gameObject;
+				Cards[i, j].GetComponent<CardController>().Scoreboard = Scoreboard;
 
 				SumInRow[i] += multiplier;
 				SumInColumn[j] += multiplier;
@@ -81,20 +84,22 @@ public class BoardController : MonoBehaviour{
 			Vector3 offset;
 
 			offset = new Vector2(5.875f, -(i + 0.125f));
-			displayNumber = (GameObject)Instantiate(Number, transform.position + offset, Quaternion.identity, transform);
+			displayNumber = (GameObject)Instantiate(NumberPrefab, transform.position + offset, Quaternion.identity, transform);
+			displayNumber.GetComponent<NumberController>().SetNumDigits(2);
 			displayNumber.GetComponent<NumberController>().SetValue(SumInRow[i]);
 
 			offset = new Vector2(5.875f, -(i + 0.53125f));
-			displayNumber = (GameObject)Instantiate(Digit, transform.position + offset, Quaternion.identity, transform);
-			displayNumber.GetComponent<DigitController>().SetValue(BombsInRow[i]);
+			displayNumber = (GameObject)Instantiate(NumberPrefab, transform.position + offset, Quaternion.identity, transform);
+			displayNumber.GetComponent<NumberController>().SetValue(BombsInRow[i]);
 
 			offset = new Vector2(i + 0.875f, -5.125f);
-			displayNumber = (GameObject)Instantiate(Number, transform.position + offset, Quaternion.identity, transform);
+			displayNumber = (GameObject)Instantiate(NumberPrefab, transform.position + offset, Quaternion.identity, transform);
+			displayNumber.GetComponent<NumberController>().SetNumDigits(2);
 			displayNumber.GetComponent<NumberController>().SetValue(SumInColumn[i]);
 
 			offset = new Vector2(i + 0.875f, -5.53125f);
-			displayNumber = (GameObject)Instantiate(Digit, transform.position + offset, Quaternion.identity, transform);
-			displayNumber.GetComponent<DigitController>().SetValue(BombsInColumn[i]);
+			displayNumber = (GameObject)Instantiate(NumberPrefab, transform.position + offset, Quaternion.identity, transform);
+			displayNumber.GetComponent<NumberController>().SetValue(BombsInColumn[i]);
 		}
 
 		InProgress = true;
@@ -102,7 +107,7 @@ public class BoardController : MonoBehaviour{
 
 	private void ClearChildren(){
 		foreach(Transform child in transform){
-			GameObject.Destroy(child.gameObject);
+			Destroy(child.gameObject);
 		}
 	}
 

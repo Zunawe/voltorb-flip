@@ -53,16 +53,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DigitSprites:
-  - {fileID: 21300000, guid: 1771295a006cb47498c13a89727ab86f, type: 3}
-  - {fileID: 21300000, guid: 3e1c955c1596b70439746e3696af29ff, type: 3}
-  - {fileID: 21300000, guid: f18a44f01c79b6f44927b2641fa88c2f, type: 3}
-  - {fileID: 21300000, guid: a6414af88113e174e8560db19d303485, type: 3}
-  - {fileID: 21300000, guid: 5190bf856dd2f424395c4c45f2b29348, type: 3}
-  - {fileID: 21300000, guid: 70efaf1e171841740bc38530294453c9, type: 3}
-  - {fileID: 21300000, guid: 84c274ace6dce844783686a5a2e655a4, type: 3}
-  - {fileID: 21300000, guid: ec9652877d4bd1c43a90b5e0ab25d271, type: 3}
-  - {fileID: 21300000, guid: 1f3070a40bdf14645b0f5bdfc59462dd, type: 3}
-  - {fileID: 21300000, guid: 2873a7930a99ac84ca6a77dadddec33c, type: 3}
+  - {fileID: 21300000, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300002, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300004, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300006, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300008, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300010, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300012, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300014, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300016, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300018, guid: 6b45a94edc5fa084ca9f115db73cc6e9, type: 3}
+  - {fileID: 21300000, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300002, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300004, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300006, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300008, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300010, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300012, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300014, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300016, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  - {fileID: 21300018, guid: c0beb84644b750245bbe4033483d8509, type: 3}
+  BigSprite: 0
 --- !u!212 &212126310053209296
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -72,6 +83,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -87,6 +99,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -103,5 +116,5 @@ SpriteRenderer:
   m_Size: {x: 0.041666668, y: 0.041666668}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
