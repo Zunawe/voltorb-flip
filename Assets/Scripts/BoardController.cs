@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoardController : MonoBehaviour{
 	public GameObject NumberPrefab;
 	public GameObject CardPrefab;
-	public GameObject SelectionIndicatorPrefab;
+	public GameObject CursorPrefab;
 
 	public GameObject Scoreboard;
 
@@ -12,9 +12,10 @@ public class BoardController : MonoBehaviour{
 
 	private GameObject[,] Cards;
 	private GameObject SelectedCard;
-	private GameObject SelectionIndicator;
+	private GameObject Cursor;
 
 	private bool InProgress = false;
+	private bool MemoOpen = false;
 	private int Level;
 	private int Score;
 	private int WinningScore;
@@ -28,7 +29,7 @@ public class BoardController : MonoBehaviour{
 	public void GenerateBoard(int level){
 		ClearChildren();
 		
-		SelectionIndicator = (GameObject)Instantiate(SelectionIndicatorPrefab, new Vector3(-5, -5, -1), Quaternion.identity, transform);
+		Cursor = (GameObject)Instantiate(CursorPrefab, new Vector3(-5, -5, -1), Quaternion.identity, transform);
 
 		Level = level;
 		Score = 1;
@@ -44,6 +45,7 @@ public class BoardController : MonoBehaviour{
 		SumInColumn = new int[5];
 		BombsInColumn = new int[5];
 
+		// Place Cards
 		for(int i = 0; i < 5; ++i){
 			for(int j = 0; j < 5; ++j){
 				int multiplier;
@@ -79,6 +81,7 @@ public class BoardController : MonoBehaviour{
 			}
 		}
 
+		// Place Numbers
 		for(int i = 0; i < 5; ++i){
 			GameObject displayNumber;
 			Vector3 offset;
@@ -180,12 +183,18 @@ public class BoardController : MonoBehaviour{
 	}
 
 	public void Select(GameObject card){
-		if(SelectedCard != null){
-			SelectedCard.GetComponent<CardController>().Selected = false;
+		CardController cardController = card.GetComponent<CardController>();
+		if(cardController.Selected && !cardController.IsFlipped() && !MemoOpen){
+			cardController.Flip();
 		}
-		card.GetComponent<CardController>().Selected = true;
-		SelectedCard = card;
-		SelectionIndicator.transform.localPosition = card.transform.localPosition + (new Vector3(0, 0, -1));
+		else{
+			if(SelectedCard != null){
+				SelectedCard.GetComponent<CardController>().Selected = false;
+			}
+			card.GetComponent<CardController>().Selected = true;
+			SelectedCard = card;
+			Cursor.transform.localPosition = card.transform.localPosition + (new Vector3(0, 0, -1));
+		}
 	}
 
 	void Update(){

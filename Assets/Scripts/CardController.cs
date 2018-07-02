@@ -30,6 +30,7 @@ public class CardController : MonoBehaviour{
 
 	public void Flip(){
 		Flipped = true;
+		Scoreboard.SendMessage("MultiplyScore", Value);
 		ChangeSprite();
 	}
 

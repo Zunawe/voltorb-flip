@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4085304574576614}
   - component: {fileID: 212235496102951744}
   m_Layer: 0
-  m_Name: SelectionIndicator
+  m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
