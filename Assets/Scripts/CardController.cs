@@ -21,7 +21,6 @@ public class CardController : MonoBehaviour{
 	public void OnTap(){
 		if(Selected && !Flipped){
 			Flip();
-			Scoreboard.SendMessage("MultiplyScore", Value);
 		}
 		else{
 			Board.SendMessage("Select", gameObject);

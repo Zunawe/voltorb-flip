@@ -1,21 +1,39 @@
 fileFormatVersion: 2
-guid: c0beb84644b750245bbe4033483d8509
-timeCreated: 1518646524
-licenseType: Free
+guid: c2899e1e552e1254ebba228fd438a88d
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Numbers (Big)_0
-    21300002: Numbers (Big)_1
-    21300004: Numbers (Big)_2
-    21300006: Numbers (Big)_3
-    21300008: Numbers (Big)_4
-    21300010: Numbers (Big)_5
-    21300012: Numbers (Big)_6
-    21300014: Numbers (Big)_7
-    21300016: Numbers (Big)_8
-    21300018: Numbers (Big)_9
+  internalIDToNameTable:
+  - first:
+      213: -7766926715068359339
+    second: Numbers (Big)_0
+  - first:
+      213: 6408433724097782660
+    second: Numbers (Big)_1
+  - first:
+      213: 5209908989114266589
+    second: Numbers (Big)_2
+  - first:
+      213: 7638061613969994912
+    second: Numbers (Big)_3
+  - first:
+      213: -1483270502001850160
+    second: Numbers (Big)_4
+  - first:
+      213: -1746814082642031445
+    second: Numbers (Big)_5
+  - first:
+      213: -906110995287412381
+    second: Numbers (Big)_6
+  - first:
+      213: -3964822370413798772
+    second: Numbers (Big)_7
+  - first:
+      213: -5505075551966848816
+    second: Numbers (Big)_8
+  - first:
+      213: -8621346282850782914
+    second: Numbers (Big)_9
   externalObjects: {}
-  serializedVersion: 4
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -33,6 +51,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -43,7 +63,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 0
     aniso: -1
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -53,20 +73,23 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  alignment: 1
+  spritePivot: {x: 0, y: 1}
   spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+  singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - buildTarget: DefaultTexturePlatform
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -75,7 +98,9 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Standalone
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -84,7 +109,9 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Android
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -93,15 +120,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -119,6 +138,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 92490af3b04890f48896ce23ea236dea
+      internalID: -7766926715068359339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_1
       rect:
@@ -133,6 +159,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: ab0997a3499aecc449c41a13e45e55e7
+      internalID: 6408433724097782660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_2
       rect:
@@ -147,6 +180,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: ec7c5210b12a1e345900331ebeb73f41
+      internalID: 5209908989114266589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_3
       rect:
@@ -161,6 +201,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c0816ed41b5cb1141a9d532f0438acfd
+      internalID: 7638061613969994912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_4
       rect:
@@ -175,6 +222,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: d6cc6a1c30f1e054d8ebb3337c7c3dfe
+      internalID: -1483270502001850160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_5
       rect:
@@ -189,6 +243,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e0507b6c93908684c862499e7c419b76
+      internalID: -1746814082642031445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_6
       rect:
@@ -203,6 +264,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e0538147aebc76c45b249a095be2ddae
+      internalID: -906110995287412381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_7
       rect:
@@ -217,6 +285,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 82f3b57681089354f9d5a9dcd6d85170
+      internalID: -3964822370413798772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_8
       rect:
@@ -231,6 +306,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 208398a7c7c2c894cb30ee61bc4b021e
+      internalID: -5505075551966848816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Numbers (Big)_9
       rect:
@@ -245,9 +327,26 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 9ff0d91597f6bbc47af10d79e5b8ed43
+      internalID: -8621346282850782914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
+    bones: []
+    spriteID: f99ff08b12b6cf042914efeaf62af6cc
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
