@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardController : MonoBehaviour{
+public class BoardController : MonoBehaviour {
 	public GameObject NumberPrefab;
 	public GameObject CardPrefab;
 	public GameObject CursorPrefab;
@@ -26,7 +26,7 @@ public class BoardController : MonoBehaviour{
 	private int[] SumInColumn;
 	private int[] BombsInColumn;
 
-	public void GenerateBoard(int level){
+	public void GenerateBoard (int level) {
 		ClearChildren();
 		
 		Cursor = (GameObject)Instantiate(CursorPrefab, new Vector3(-5, -5, -1), Quaternion.identity, transform);
@@ -46,32 +46,30 @@ public class BoardController : MonoBehaviour{
 		BombsInColumn = new int[5];
 
 		// Place Cards
-		for(int i = 0; i < 5; ++i){
-			for(int j = 0; j < 5; ++j){
+		for (int i = 0; i < 5; ++i ){
+			for (int j = 0; j < 5; ++j) {
 				int multiplier;
 				float p = Random.value;
-				if(p < (float)Multipliers[0] / (float)(25 - ((5 * i) + j))){
+				if (p < (float)Multipliers[0] / (float)(25 - ((5 * i) + j))){
 					multiplier = 0;
-				}
-				else if(p < (float)(Multipliers[0] + Multipliers[1]) / (float)(25 - ((5 * i) + j))){
+				} else if (p < (float)(Multipliers[0] + Multipliers[1]) / (float)(25 - ((5 * i) + j))){
 					multiplier = 1;
-				}
-				else if(p < (float)(Multipliers[0] + Multipliers[1] + Multipliers[2]) / (25 - ((5 * i) + j))){
+				} else if (p < (float)(Multipliers[0] + Multipliers[1] + Multipliers[2]) / (25 - ((5 * i) + j))){
 					multiplier = 2;
-				}
-				else{
+				} else {
 					multiplier = 3;
 				}
 				--Multipliers[multiplier];
-				if(multiplier != 0){
+				if (multiplier != 0) {
 					WinningScore *= multiplier;
 				}
 
 				Vector3 offset = new Vector3(j, -i, 0);
 				Cards[i, j] = (GameObject)Instantiate(CardPrefab, transform.position + offset, Quaternion.identity, transform);
 				Cards[i, j].GetComponent<CardController>().SetValue(multiplier);
+				GameState.GetGameState().SetCardValue(i, j, multiplier);
+				Cards[i, j].GetComponent<CardController>().SetPosition(i, j);
 				Cards[i, j].GetComponent<CardController>().Board = gameObject;
-				Cards[i, j].GetComponent<CardController>().Scoreboard = Scoreboard;
 
 				SumInRow[i] += multiplier;
 				SumInColumn[j] += multiplier;
@@ -82,7 +80,7 @@ public class BoardController : MonoBehaviour{
 		}
 
 		// Place Numbers
-		for(int i = 0; i < 5; ++i){
+		for (int i = 0; i < 5; ++i) {
 			GameObject displayNumber;
 			Vector3 offset;
 
@@ -108,15 +106,15 @@ public class BoardController : MonoBehaviour{
 		InProgress = true;
 	}
 
-	private void ClearChildren(){
-		foreach(Transform child in transform){
+	private void ClearChildren () {
+		foreach (Transform child in transform) {
 			Destroy(child.gameObject);
 		}
 	}
 
-	private void GenerateLayouts(){
+	private void GenerateLayouts () {
 		Layouts = new List<int[]>[8];
-		for(int i = 0; i < Layouts.Length; ++i){
+		for (int i = 0; i < Layouts.Length; ++i) {
 			Layouts[i] = new List<int[]>();
 		}
 		Layouts[0].Add(new int[]{6, 0, 3, 1});
@@ -162,27 +160,26 @@ public class BoardController : MonoBehaviour{
 		Layouts[7].Add(new int[]{10, 0, 2, 6});
 		Layouts[7].Add(new int[]{10, 0, 7, 3});
 
-
-		for(int i = 0; i < Layouts.Length; ++i){
-			for(int j = 0; j < Layouts[i].Count; ++j){
+		for (int i = 0; i < Layouts.Length; ++i) {
+			for (int j = 0; j < Layouts[i].Count; ++j) {
 				Layouts[i][j][1] = 25 - Layouts[i][j][0] - Layouts[i][j][2] - Layouts[i][j][3];
 			}
 		}
 	}
 
-	public int GetScore(){
+	public int GetScore () {
 		return Score;
 	}
 
-	public bool IsLost(){
+	public bool IsLost () {
 		return Score == 0;
 	}
 
-	public bool IsWon(){
+	public bool IsWon () {
 		return Score == WinningScore;
 	}
 
-	public void Select(GameObject card){
+	public void Select (GameObject card) {
 		CardController cardController = card.GetComponent<CardController>();
 		if(cardController.Selected && !cardController.IsFlipped() && !MemoOpen){
 			cardController.Flip();
@@ -197,17 +194,31 @@ public class BoardController : MonoBehaviour{
 		}
 	}
 
-	void Update(){
+	public void CardTapped (GameObject card) {
+		CardController cardController = card.GetComponent<CardController>();
+		if(cardController.Selected && !cardController.IsFlipped() && !MemoOpen){
+			cardController.Flip();
+		} else {
+			if (SelectedCard != null) {
+				SelectedCard.GetComponent<CardController>().Selected = false;
+			}
+			card.GetComponent<CardController>().Selected = true;
+			SelectedCard = card;
+			Cursor.transform.localPosition = card.transform.localPosition + (new Vector3(0, 0, -1));
+		}
+	}
+
+	void Update () {
 		if(InProgress){
 			UpdateScore();
 		}
 	}
 
-	void UpdateScore(){
+	void UpdateScore () {
 		Score = 1;
-		for(int i = 0; i < 5; ++i){
-			for(int j = 0; j < 5; ++j){
-				if(Cards[i, j].GetComponent<CardController>().IsFlipped()){
+		for (int i = 0; i < 5; ++i) {
+			for (int j = 0; j < 5; ++j) {
+				if (Cards[i, j].GetComponent<CardController>().IsFlipped()) {
 					Score *= Cards[i, j].GetComponent<CardController>().GetValue();
 				}
 			}

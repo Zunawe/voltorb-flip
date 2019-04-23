@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreboardController : MonoBehaviour{
+public class ScoreboardController : MonoBehaviour {
 	public GameObject NumberPrefab;
 
 	private int Total;
 	private GameObject DisplayTotal;
-	private int Current;
 	private GameObject DisplayCurrent;
 
 	// Use this for initialization
-	void Awake(){
+	void Awake () {
+		GameState.GetGameState().SubscribeToCurrentScore(UpdateDisplay);
 		Total = 0;
-		Current = 0;
 
 		DisplayTotal = (GameObject)Instantiate(NumberPrefab, transform.position, Quaternion.identity, transform);
 		DisplayTotal.GetComponent<NumberController>().SetNumDigits(5);
@@ -24,25 +23,14 @@ public class ScoreboardController : MonoBehaviour{
 
 		DisplayCurrent = (GameObject)Instantiate(NumberPrefab, transform.position, Quaternion.identity, transform);
 		DisplayCurrent.GetComponent<NumberController>().SetNumDigits(5);
-		DisplayCurrent.GetComponent<NumberController>().SetValue(Current);
+		DisplayCurrent.GetComponent<NumberController>().SetValue(0);
 		DisplayCurrent.GetComponent<NumberController>().UseBigSprites(true);
 		DisplayCurrent.transform.parent = gameObject.transform;
 		DisplayCurrent.transform.localPosition = new Vector3(5.78125f, -1.53125f, -1);
 	}
 
-	public void MultiplyScore(int multiplier){
-		Current = Current == 0 ? multiplier : Current * multiplier;
-		UpdateDisplay();
-	}
-
-	public void Flush(){
-		Total += Current;
-		Current = 0;
-		UpdateDisplay();
-	}
-
-	private void UpdateDisplay(){
-		DisplayCurrent.GetComponent<NumberController>().SetValue(Current);
+	private void UpdateDisplay (int value) {
+		DisplayCurrent.GetComponent<NumberController>().SetValue(value);
 		DisplayTotal.GetComponent<NumberController>().SetValue(Total);
 	}
 }
