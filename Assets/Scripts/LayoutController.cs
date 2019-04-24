@@ -9,36 +9,28 @@ public class LayoutController : MonoBehaviour {
 	public GameObject ScoreboardGameObject;
 	private ScoreboardController Scoreboard;
 
-	private int Level = 1;
-	private float ResetTimer = 0;
-	private bool IsResetting = false;
-
 	void Awake () {
+		GameState.GetGameState().OnChange("CurrentScore", HandleScoreUpdate);
 		Board = BoardGameObject.GetComponent<BoardController>();
 		Scoreboard = ScoreboardGameObject.GetComponent<ScoreboardController>();
+		GameState.GetGameState().SetCurrentScore(1);
 		Board.GenerateBoard(1);
 	}
-	
-	void Update () {
-		if (Board.IsLost()) {
-			GameState.GetGameState().SetLevel(1);
-			Level = Math.Max(Level - 1, 1);
-			Reset();
-		} else if (Board.IsWon()) {
-			Level = Math.Min(Level + 1, 8);
-			Reset();
-		}
-	}
 
-	public void Reset () {
-		if (!IsResetting) {
-			ResetTimer = 3.0f;
-			IsResetting = true;
-		} else if (ResetTimer > 0) {
-			ResetTimer -= Time.deltaTime;
-		} else {
-			IsResetting = false;
-			Board.GenerateBoard(Level);
+	public void HandleScoreUpdate (GameState state) {
+		int currentScore = state.GetCurrentScore();
+		int level = state.GetLevel();
+		if (currentScore == 0) {
+			state.SetLevelState(LevelState.Lost);
+			state.SetLevel(Math.Max(level - 1, 1));
+			state.Refresh();
+			Board.GenerateBoard(Math.Max(level - 1, 1));
+		} else if (currentScore == Board.GetWinningScore()) {
+			state.AddTotalScore(currentScore);
+			state.SetLevelState(LevelState.Won);
+			state.SetLevel(Math.Min(level + 1, 8));
+			state.Refresh();
+			Board.GenerateBoard(Math.Min(level + 1, 8));
 		}
 	}
 }

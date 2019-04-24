@@ -4,7 +4,6 @@ using UnityEngine;
 public class BoardController : MonoBehaviour {
 	public GameObject NumberPrefab;
 	public GameObject CardPrefab;
-	public GameObject CursorPrefab;
 
 	public GameObject Scoreboard;
 
@@ -12,10 +11,7 @@ public class BoardController : MonoBehaviour {
 
 	private GameObject[,] Cards;
 	private GameObject SelectedCard;
-	private GameObject Cursor;
 
-	private bool InProgress = false;
-	private bool MemoOpen = false;
 	private int Level;
 	private int Score;
 	private int WinningScore;
@@ -28,8 +24,6 @@ public class BoardController : MonoBehaviour {
 
 	public void GenerateBoard (int level) {
 		ClearChildren();
-		
-		Cursor = (GameObject)Instantiate(CursorPrefab, new Vector3(-5, -5, -1), Quaternion.identity, transform);
 
 		Level = level;
 		Score = 1;
@@ -102,8 +96,6 @@ public class BoardController : MonoBehaviour {
 			displayNumber = (GameObject)Instantiate(NumberPrefab, transform.position + offset, Quaternion.identity, transform);
 			displayNumber.GetComponent<NumberController>().SetValue(BombsInColumn[i]);
 		}
-
-		InProgress = true;
 	}
 
 	private void ClearChildren () {
@@ -167,8 +159,8 @@ public class BoardController : MonoBehaviour {
 		}
 	}
 
-	public int GetScore () {
-		return Score;
+	public int GetWinningScore () {
+		return WinningScore;
 	}
 
 	public bool IsLost () {
@@ -179,49 +171,7 @@ public class BoardController : MonoBehaviour {
 		return Score == WinningScore;
 	}
 
-	public void Select (GameObject card) {
-		CardController cardController = card.GetComponent<CardController>();
-		if(cardController.Selected && !cardController.IsFlipped() && !MemoOpen){
-			cardController.Flip();
-		}
-		else{
-			if(SelectedCard != null){
-				SelectedCard.GetComponent<CardController>().Selected = false;
-			}
-			card.GetComponent<CardController>().Selected = true;
-			SelectedCard = card;
-			Cursor.transform.localPosition = card.transform.localPosition + (new Vector3(0, 0, -1));
-		}
-	}
-
-	public void CardTapped (GameObject card) {
-		CardController cardController = card.GetComponent<CardController>();
-		if(cardController.Selected && !cardController.IsFlipped() && !MemoOpen){
-			cardController.Flip();
-		} else {
-			if (SelectedCard != null) {
-				SelectedCard.GetComponent<CardController>().Selected = false;
-			}
-			card.GetComponent<CardController>().Selected = true;
-			SelectedCard = card;
-			Cursor.transform.localPosition = card.transform.localPosition + (new Vector3(0, 0, -1));
-		}
-	}
-
-	void Update () {
-		if(InProgress){
-			UpdateScore();
-		}
-	}
-
-	void UpdateScore () {
-		Score = 1;
-		for (int i = 0; i < 5; ++i) {
-			for (int j = 0; j < 5; ++j) {
-				if (Cards[i, j].GetComponent<CardController>().IsFlipped()) {
-					Score *= Cards[i, j].GetComponent<CardController>().GetValue();
-				}
-			}
-		}
+	public GameObject GetCardAt (int i, int j) {
+		return Cards[i, j];
 	}
 }

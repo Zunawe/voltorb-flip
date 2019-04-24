@@ -21,16 +21,14 @@ public class CardController : MonoBehaviour {
 	}
 
 	public void OnTap () {
-		if (Selected && !Flipped) {
+		State.TapCard(Row, Column);
+		if (State.IsFlipped(Row, Column) && !Flipped) {
 			Flip();
-		} else {
-			Board.SendMessage("Select", gameObject);
 		}
 	}
 
 	public void Flip () {
 		Flipped = true;
-		State.MultiplyCurrentScore(State.GetCardValue(Row, Column));
 		ChangeSprite();
 	}
 
