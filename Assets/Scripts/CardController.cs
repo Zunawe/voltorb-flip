@@ -7,6 +7,7 @@ public class CardController : MonoBehaviour {
 	public GameObject Board;
 
 	private SpriteRenderer SR;
+	private Animator animator;
 	private int Value;
 	private int Row;
 	private int Column;
@@ -15,7 +16,7 @@ public class CardController : MonoBehaviour {
 
 	void Awake () {
 		Flipped = false;
-		SR = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
 		SetValue(1);
 		GetComponent<DetectTapped>().RegisterCallback(OnTap);
 	}
@@ -29,7 +30,7 @@ public class CardController : MonoBehaviour {
 
 	public void Flip () {
 		Flipped = true;
-		ChangeSprite();
+		animator.SetBool("Flipped", true);
 	}
 
 	public bool IsFlipped () {
@@ -42,7 +43,7 @@ public class CardController : MonoBehaviour {
 
 	public void SetValue (int v) {
 		Value = v;
-		ChangeSprite();
+		animator.SetInteger("Value", v);
 	}
 
 	public int GetPosition () {
@@ -52,9 +53,5 @@ public class CardController : MonoBehaviour {
 	public void SetPosition (int r, int c) {
 		Row = r;
 		Column = c;
-	}
-
-	private void ChangeSprite () {
-		SR.sprite = Flipped ? FlippedSprites[Value] : UnflippedSprite;
 	}
 }
