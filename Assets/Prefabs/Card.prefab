@@ -152,8 +152,11 @@ MonoBehaviour:
   - {fileID: -2036882289383674236, guid: 0d11f73baa4e4ea4199f7810d4409bd3, type: 3}
   - {fileID: -3950460959431214944, guid: 0d11f73baa4e4ea4199f7810d4409bd3, type: 3}
   UnflippedSprite: {fileID: 21300000, guid: 3a0ef81902a670a43be5de2ef8703279, type: 3}
-  Selected: 0
   Board: {fileID: 0}
+  BlinkEffectPrefab: {fileID: 6387938839740848536, guid: ca8ed1fe6bd0848428c3430be4957735,
+    type: 3}
+  ExplosionEffectPrefab: {fileID: 5901438162407253173, guid: 740f060b0a372a84aabf06163c5c9ce7,
+    type: 3}
 --- !u!114 &114023586453257488
 MonoBehaviour:
   m_ObjectHideFlags: 0

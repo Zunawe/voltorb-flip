@@ -63,7 +63,6 @@ public class BoardController : MonoBehaviour {
 				Cards[i, j].GetComponent<CardController>().SetValue(multiplier);
 				GameState.GetGameState().SetCardValue(i, j, multiplier);
 				Cards[i, j].GetComponent<CardController>().SetPosition(i, j);
-				Cards[i, j].GetComponent<CardController>().Board = gameObject;
 
 				SumInRow[i] += multiplier;
 				SumInColumn[j] += multiplier;

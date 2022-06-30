@@ -3,8 +3,8 @@
 public class CardController : MonoBehaviour {
 	public Sprite[] FlippedSprites;
 	public Sprite UnflippedSprite;
-	public bool Selected;
-	public GameObject Board;
+	public GameObject BlinkEffectPrefab;
+	public GameObject ExplosionEffectPrefab;
 
 	private SpriteRenderer SR;
 	private Animator animator;
@@ -22,15 +22,28 @@ public class CardController : MonoBehaviour {
 	}
 
 	public void OnTap () {
-		State.TapCard(Row, Column);
-		if (State.IsFlipped(Row, Column) && !Flipped) {
-			Flip();
+		if (State.IsInteractable()) {
+			State.TapCard(Row, Column);
+			if (State.IsFlipped(Row, Column) && !Flipped) {
+				Flip();
+			}
 		}
 	}
 
 	public void Flip () {
 		Flipped = true;
 		animator.SetBool("Flipped", true);
+		if (Value == 0) {
+			State.SetInteractable(false);
+		}
+	}
+
+	void FlipAnimationEnd () { 
+		if (Value == 0) {
+			Instantiate(ExplosionEffectPrefab, transform.position + (new Vector3(-0.5f, 0.5f, -2)), Quaternion.identity, transform);
+		} else {
+			Instantiate(BlinkEffectPrefab, transform.position + (new Vector3(-0.5f, 0.5f, -2)), Quaternion.identity, transform);
+		}
 	}
 
 	public bool IsFlipped () {

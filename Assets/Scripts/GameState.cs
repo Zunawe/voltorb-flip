@@ -2,23 +2,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum LevelState {
-    Playing,
-    Won,
-    Lost
-}
-
 public class GameState {
     private static GameState Instance = null;
 
     private int TotalScore;
     private int CurrentScore;
     private int Level;
-    private LevelState State;
     private bool[,] FlippedCards = new bool[5, 5];
     private int[,] CardValues = new int[5, 5];
     private int[] Selected = new int[2];
-    private bool Interactable;
+    private bool Interactable = true;
 
     private Dictionary<string, List<Action<GameState>>> Subscriptions;
 
@@ -83,14 +76,6 @@ public class GameState {
         this.Level = value;
     }
 
-    public LevelState GetLevelState () {
-        return this.State;
-    }
-
-    public void SetLevelState (LevelState value) {
-        this.State = value;
-    }
-
     public bool IsFlipped (int i, int j) {
         return FlippedCards[i, j];
     }
@@ -126,6 +111,14 @@ public class GameState {
 
     public void SetCardValue (int i, int j, int value) {
         this.CardValues[i, j] = value;
+    }
+
+    public bool IsInteractable () {
+        return this.Interactable;
+    }
+
+    public bool SetInteractable (bool b) {
+        return this.Interactable = b;
     }
 
     public void TapCard (int i, int j) {
