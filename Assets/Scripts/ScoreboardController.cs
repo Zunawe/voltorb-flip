@@ -8,7 +8,6 @@ public class ScoreboardController : MonoBehaviour {
 	private GameObject DisplayTotal;
 	private GameObject DisplayCurrent;
 
-	// Use this for initialization
 	void Awake () {
 		GameState.GetGameState().OnChange("CurrentScore", UpdateCurrentScore);
 		GameState.GetGameState().OnChange("TotalScore", UpdateTotalScore);

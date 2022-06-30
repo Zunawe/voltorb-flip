@@ -3,136 +3,136 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameState {
-    private static GameState Instance = null;
+	private static GameState Instance = null;
 
-    private int TotalScore;
-    private int CurrentScore;
-    private int Level;
-    private bool[,] FlippedCards = new bool[5, 5];
-    private int[,] CardValues = new int[5, 5];
-    private int[] Selected = new int[2];
-    private bool Interactable = true;
+	private int TotalScore;
+	private int CurrentScore;
+	private int Level;
+	private bool[,] FlippedCards = new bool[5, 5];
+	private int[,] CardValues = new int[5, 5];
+	private int[] Selected = new int[2];
+	private bool Interactable = true;
 
-    private Dictionary<string, List<Action<GameState>>> Subscriptions;
+	private Dictionary<string, List<Action<GameState>>> Subscriptions;
 
-    private GameState () {
-        this.Subscriptions = new Dictionary<string, List<Action<GameState>>>();
-    }
+	private GameState () {
+		this.Subscriptions = new Dictionary<string, List<Action<GameState>>>();
+	}
 
-    public static GameState GetGameState() {
-        if (Instance == null) {
-            Instance = new GameState();
-        }
-        return Instance;
-    }
+	public static GameState GetGameState() {
+		if (Instance == null) {
+			Instance = new GameState();
+		}
+		return Instance;
+	}
 
-    public void Refresh () {
-        SetCurrentScore(1);
-        for (int i = 0; i < 5; ++i) {
-            for (int j = 0; j < 5; ++j) {
-                FlippedCards[i, j] = false;
-                CardValues[i, j] = 1;
-            }
-        }
-    }
+	public void Refresh () {
+		SetCurrentScore(1);
+		for (int i = 0; i < 5; ++i) {
+			for (int j = 0; j < 5; ++j) {
+				FlippedCards[i, j] = false;
+				CardValues[i, j] = 1;
+			}
+		}
+	}
 
-    public int GetTotalScore () {
-        return this.TotalScore;
-    }
+	public int GetTotalScore () {
+		return this.TotalScore;
+	}
 
-    public void SetTotalScore (int value) {
-        this.TotalScore = value;
+	public void SetTotalScore (int value) {
+		this.TotalScore = value;
 
-        foreach (Action<GameState> cb in Subscriptions["TotalScore"]) {
-            cb(this);
-        }
-    }
+		foreach (Action<GameState> cb in Subscriptions["TotalScore"]) {
+			cb(this);
+		}
+	}
 
-    public void AddTotalScore (int value) {
-        this.SetTotalScore(this.TotalScore + value);
-    }
+	public void AddTotalScore (int value) {
+		this.SetTotalScore(this.TotalScore + value);
+	}
 
-    public int GetCurrentScore () {
-        return this.CurrentScore;
-    }
+	public int GetCurrentScore () {
+		return this.CurrentScore;
+	}
 
-    public void SetCurrentScore (int value) {
-        this.CurrentScore = value;
+	public void SetCurrentScore (int value) {
+		this.CurrentScore = value;
 
-        foreach (Action<GameState> cb in Subscriptions["CurrentScore"]) {
-            cb(this);
-        }
-    }
+		foreach (Action<GameState> cb in Subscriptions["CurrentScore"]) {
+			cb(this);
+		}
+	}
 
-    public void MultiplyCurrentScore (int value) {
-        this.SetCurrentScore(this.CurrentScore * value);
-    }
+	public void MultiplyCurrentScore (int value) {
+		this.SetCurrentScore(this.CurrentScore * value);
+	}
 
-    public int GetLevel () {
-        return this.Level;
-    }
+	public int GetLevel () {
+		return this.Level;
+	}
 
-    public void SetLevel (int value) {
-        this.Level = value;
-    }
+	public void SetLevel (int value) {
+		this.Level = value;
+	}
 
-    public bool IsFlipped (int i, int j) {
-        return FlippedCards[i, j];
-    }
+	public bool IsFlipped (int i, int j) {
+		return FlippedCards[i, j];
+	}
 
-    public void SetFlipped (int i, int j, bool value) {
-        FlippedCards[i, j] = value;
-    }
+	public void SetFlipped (int i, int j, bool value) {
+		FlippedCards[i, j] = value;
+	}
 
-    public bool IsSelected (int i, int j) {
-        return i == Selected[0] && j == Selected[1];
-    }
+	public bool IsSelected (int i, int j) {
+		return i == Selected[0] && j == Selected[1];
+	}
 
-    public int GetSelectedRow () {
-        return Selected[0];
-    }
+	public int GetSelectedRow () {
+		return Selected[0];
+	}
 
-    public int GetSelectedColumn () {
-        return Selected[1];
-    }
+	public int GetSelectedColumn () {
+		return Selected[1];
+	}
 
-    public void Select (int i, int j) {
-        Selected[0] = i;
-        Selected[1] = j;
+	public void Select (int i, int j) {
+		Selected[0] = i;
+		Selected[1] = j;
 
-        foreach (Action<GameState> cb in Subscriptions["Select"]) {
-            cb(this);
-        }
-    }
+		foreach (Action<GameState> cb in Subscriptions["Select"]) {
+			cb(this);
+		}
+	}
 
-    public int GetCardValue (int i, int j) {
-        return this.CardValues[i, j];
-    }
+	public int GetCardValue (int i, int j) {
+		return this.CardValues[i, j];
+	}
 
-    public void SetCardValue (int i, int j, int value) {
-        this.CardValues[i, j] = value;
-    }
+	public void SetCardValue (int i, int j, int value) {
+		this.CardValues[i, j] = value;
+	}
 
-    public bool IsInteractable () {
-        return this.Interactable;
-    }
+	public bool IsInteractable () {
+		return this.Interactable;
+	}
 
-    public bool SetInteractable (bool b) {
-        return this.Interactable = b;
-    }
+	public bool SetInteractable (bool b) {
+		return this.Interactable = b;
+	}
 
-    public void TapCard (int i, int j) {
-        if (IsSelected(i, j) && !IsFlipped(i, j)) {
-            MultiplyCurrentScore(GetCardValue(i, j));
-            SetFlipped(i, j, true);
-        }
-        Select(i, j);
-    }
+	public void TapCard (int i, int j) {
+		if (IsSelected(i, j) && !IsFlipped(i, j)) {
+			MultiplyCurrentScore(GetCardValue(i, j));
+			SetFlipped(i, j, true);
+		}
+		Select(i, j);
+	}
 
-    public void OnChange (string name, Action<GameState> cb) {
-        if (!this.Subscriptions.ContainsKey(name)) {
-            this.Subscriptions.Add(name, new List<Action<GameState>>());
-        }
-        this.Subscriptions[name].Add(cb);
-    }
+	public void OnChange (string name, Action<GameState> cb) {
+		if (!this.Subscriptions.ContainsKey(name)) {
+			this.Subscriptions.Add(name, new List<Action<GameState>>());
+		}
+		this.Subscriptions[name].Add(cb);
+	}
 }

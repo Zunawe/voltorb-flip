@@ -13,7 +13,7 @@ public class CursorController : MonoBehaviour {
 	}
 
 	public void HandleSelect (GameState state) {
-        GameObject card = Board.GetComponent<BoardController>().GetCardAt(state.GetSelectedRow(), state.GetSelectedColumn());
-        gameObject.transform.position = card.transform.position + (new Vector3(0, 0, -1));
+		GameObject card = Board.GetComponent<BoardController>().GetCardAt(state.GetSelectedRow(), state.GetSelectedColumn());
+		gameObject.transform.position = card.transform.position + (new Vector3(0, 0, -1));
 	}
 }

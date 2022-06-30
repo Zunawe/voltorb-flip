@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class NumberController : MonoBehaviour{
+public class NumberController : MonoBehaviour {
 	public GameObject Digit;
 	public int NumDigits;
 
